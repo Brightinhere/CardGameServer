@@ -36,12 +36,21 @@ public class BlackjackGame {
 
     public void start() {
         validateStart();
+        resetPlayersForNewRound();
         deck.shuffle();
         dealInitialCards();
         state = GameState.IN_PROGRESS;
         checkForBlackjacks();
         skipNonPlayingPlayersAtStart();
     }
+
+    private void resetPlayersForNewRound() {
+        for (Player player : players) {
+            player.setStatus(PlayerStatus.PLAYING);
+            player.getHand().clear();   // You must have clear()
+        }
+    }
+
 
     private void skipNonPlayingPlayersAtStart() {
         while (currentPlayerIndex < players.size()
@@ -121,7 +130,11 @@ public class BlackjackGame {
         if (state != GameState.IN_PROGRESS) {
             return null;
         }
-        return players.get(currentPlayerIndex).getId();
+        if (currentPlayerIndex < 0 || currentPlayerIndex >= players.size()) {
+            return null;
+        }
+        Player current = players.get(currentPlayerIndex);
+        return current != null ? current.getId() : null;
     }
 
 

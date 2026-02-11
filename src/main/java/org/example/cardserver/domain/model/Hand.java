@@ -49,4 +49,8 @@ public class Hand {
     public int getValue() {
         return calculateValue();
     }
+
+    public void clear() {
+        this.cards.clear();
+    }
 }

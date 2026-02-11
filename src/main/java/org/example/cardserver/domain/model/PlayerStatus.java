@@ -4,5 +4,5 @@ public enum PlayerStatus {
     PLAYING,
     STAND,
     BUST,
-    BLACKJACK
+    PUSH, WON, LOST, BLACKJACK
 }

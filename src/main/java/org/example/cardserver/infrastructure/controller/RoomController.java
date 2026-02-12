@@ -6,6 +6,7 @@ import org.example.cardserver.domain.model.Room;
 import org.example.cardserver.infrastructure.dto.RoomResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -44,6 +45,13 @@ public class RoomController {
     public Room stand(@PathVariable UUID roomId,
                       @PathVariable UUID playerId) {
         return roomService.stand(roomId, playerId);
+    }
+
+    @GetMapping("/")
+    public List<RoomResponse> getRooms() {
+        return roomService.getRooms().stream()
+                .map(RoomMapper::toResponse)
+                .toList();
     }
 
     @GetMapping("/{roomId}")

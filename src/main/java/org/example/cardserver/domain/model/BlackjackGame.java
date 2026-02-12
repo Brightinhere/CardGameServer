@@ -47,7 +47,7 @@ public class BlackjackGame {
     private void resetPlayersForNewRound() {
         for (Player player : players) {
             player.setStatus(PlayerStatus.PLAYING);
-            player.getHand().clear();   // You must have clear()
+            player.getHand().clear();
         }
     }
 

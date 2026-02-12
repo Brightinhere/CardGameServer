@@ -4,9 +4,7 @@ import org.example.cardserver.application.port.RoomRepository;
 import org.example.cardserver.domain.model.Room;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -28,5 +26,10 @@ public class InMemoryRoomRepository implements RoomRepository {
     @Override
     public void delete(UUID roomId) {
         rooms.remove(roomId);
+    }
+
+    @Override
+    public List<Room> findAll() {
+        return new ArrayList<>(rooms.values());
     }
 }

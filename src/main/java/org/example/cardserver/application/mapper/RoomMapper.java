@@ -2,12 +2,14 @@ package org.example.cardserver.application.mapper;
 
 import org.example.cardserver.domain.model.*;
 import org.example.cardserver.infrastructure.dto.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class RoomMapper {
 
-    public static RoomResponse toResponse(Room room) {
+    public RoomResponse toResponse(Room room) {
         return new RoomResponse(
                 room.getId(),
                 mapRoomPlayers(room.getPlayers()),
@@ -17,7 +19,7 @@ public class RoomMapper {
 
     // -------- Room Level --------
 
-    private static List<RoomPlayerResponse> mapRoomPlayers(List<Player> players) {
+    private List<RoomPlayerResponse> mapRoomPlayers(List<Player> players) {
         return players.stream()
                 .map(player -> new RoomPlayerResponse(
                         player.getId(),
@@ -28,7 +30,7 @@ public class RoomMapper {
 
     // -------- Game Level --------
 
-    private static GameResponse mapGame(BlackjackGame game) {
+    private GameResponse mapGame(BlackjackGame game) {
         if (game == null) return null;
 
         return new GameResponse(
@@ -39,13 +41,13 @@ public class RoomMapper {
         );
     }
 
-    private static List<GamePlayerResponse> mapGamePlayers(List<Player> players) {
+    private List<GamePlayerResponse> mapGamePlayers(List<Player> players) {
         return players.stream()
-                .map(RoomMapper::mapGamePlayer)
+                .map(this::mapGamePlayer)
                 .toList();
     }
 
-    private static GamePlayerResponse mapGamePlayer(Player player) {
+    private GamePlayerResponse mapGamePlayer(Player player) {
         return new GamePlayerResponse(
                 player.getId(),
                 player.getName(),
@@ -56,7 +58,7 @@ public class RoomMapper {
 
     // -------- Shared Hand Mapping --------
 
-    private static HandResponse mapHand(Hand hand) {
+    private HandResponse mapHand(Hand hand) {
         return new HandResponse(
                 hand.getCards().stream()
                         .map(card -> new CardResponse(

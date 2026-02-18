@@ -1,10 +1,8 @@
 package org.example.cardserver.application.service;
 
-import org.example.cardserver.application.mapper.RoomMapper;
 import org.example.cardserver.application.port.RoomRepository;
 import org.example.cardserver.domain.model.Player;
 import org.example.cardserver.domain.model.Room;
-import org.example.cardserver.infrastructure.dto.RoomResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

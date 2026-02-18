@@ -14,9 +14,11 @@ import java.util.UUID;
 public class RoomController {
 
     private final RoomService roomService;
+    private final RoomMapper roomMapper;
 
-    public RoomController(RoomService roomService) {
+    public RoomController(RoomService roomService, RoomMapper roomMapper) {
         this.roomService = roomService;
+        this.roomMapper = roomMapper;
     }
 
     @PostMapping
@@ -50,12 +52,12 @@ public class RoomController {
     @GetMapping("/")
     public List<RoomResponse> getRooms() {
         return roomService.getRooms().stream()
-                .map(RoomMapper::toResponse)
+                .map(roomMapper::toResponse)
                 .toList();
     }
 
     @GetMapping("/{roomId}")
     public RoomResponse getRoom(@PathVariable UUID roomId) {
-        return RoomMapper.toResponse(roomService.getRoom(roomId));
+        return roomMapper.toResponse(roomService.getRoom(roomId));
     }
 }
